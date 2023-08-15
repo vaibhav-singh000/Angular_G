@@ -1,0 +1,27 @@
+.inp{
+    padding: 8px;
+    width: 700px;
+    border: 2px solid black;
+    border-radius: 6px;
+    background-color: aliceblue;
+}
+
+.event-form{
+    margin-top: 30px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.view-events{
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.view-button{
+    cursor: pointer;
+}
+
+.table-container{
+    height: 400px;
+    overflow-y: auto;
+}

@@ -1,0 +1,136 @@
+<div class="container">
+
+  <div class="row event-form">
+    <div class="col-6">
+      <table class="table">
+        <tr>
+          <th>EventName</th>
+          <th>EventDate</th>
+        </tr>
+        <tr>
+          <td><input type="text" [(ngModel)]="EventName"></td>
+          <td><input type="date" [(ngModel)]="EventDate"></td>
+        </tr>
+        <tr>
+          <th>EventTime</th>
+          <th>Location</th>
+        </tr>
+        <tr>
+          <td><input type="time" [(ngModel)]="EventTime"></td>
+          <td><input type="text" [(ngModel)]="Location"></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-3">
+      <table class="table">
+        <div>
+          <th>Audiences</th>
+          <th><button (click)="add()">+</button></th>
+        </div>
+        <tr>
+          <td>
+            <div *ngFor="let i of option1">
+              <input type="text" [(ngModel)]="option[i-1]">
+            </div>
+          </td>
+
+        </tr>
+        <br>
+        <br>
+      </table>
+    </div>
+    <div class="col-3">
+      <table class="table">
+        <div>
+          <tr>
+            <th>EventImages</th>
+            <th><button (click)="addimage()">+</button></th>
+          </tr>
+          <tr>
+            <td>
+              <div *ngFor="let i of option2">
+                <input type="file" accept="image/*" (change)="onSelect($event)">
+              </div>
+            </td>
+          </tr>
+        </div>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <button (click)="submit()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="view-events">
+    <div class="row">
+      <div class="col-3">
+        <select [(ngModel)]="searchEventByValue" (change)="searchEventBy()" class="form-control">
+          <option value="">Select the Given Value to Get the Data</option>
+          <option value="date">Date</option>
+          <option value="location">Location</option>
+          <option value="audience">Audience</option>
+        </select>
+      </div>
+      <div class="col-3">
+        <input class="form-control" type="{{searchEventTextType}}" placeholder="Search your information"
+          [(ngModel)]="searchString" />
+      </div>
+      <div class="col-6">
+        <button (click)="Searchdata()" class="btn btn-primary ">Search</button>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-8 table-container">
+        <table class="table table-hover table-bordered">
+          <tr>
+            <th>ID</th>
+            <th>EventName</th>
+            <th>EventDate</th>
+            <th>EventTime</th>
+            <th>Location</th>
+            <th>Audiences</th>
+            <th>Images</th>
+          </tr>
+          <tr *ngFor="let i of alldata; let indx = index;">
+            <td>{{indx+1}}</td>
+            <td>{{i.EventName}}</td>
+            <td>{{i.EventDate}}</td>
+            <td>{{i.EventTime}}</td>
+            <td>{{i.Location}}</td>
+            <td (click)="viewAudiences(i._id)" class="view-button">View Audiences</td>
+            <td (click)="viewImages(i._id)" class="view-button">View Images</td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-4">
+        <div *ngIf="allAudience?.length>0">
+          <table class="table">
+            <tr>
+              <th>Audiences</th>
+            </tr>
+            <tr *ngFor="let i of allAudience">
+              <td>{{i.Audiences}}</td>
+            </tr>
+          </table>
+        </div>
+        <div *ngIf="allimage?.length>0">
+          <table class="table">
+            <tr>
+              <th>Images</th>
+            </tr>
+            <tr *ngFor="let i of allimage">
+              <td>
+                <img src="{{i.images}}" style="height: 200px;">
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
